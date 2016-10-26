@@ -11,17 +11,27 @@
   <script src="lib/jasmine-2.2.0/jasmine.js"></script>
   <script src="lib/jasmine-2.2.0/jasmine-html.js"></script>
   <script src="lib/jasmine-2.2.0/boot.js"></script>
-
-  <!-- source files -->
-  <script src="src/Stopwatch.js"></script>
-  <script src="src/"></script>
-
-
-  <!-- spec file -->
-  <script src="spec/StopwatchSpec.js"></script>
-
 </head>
 
 <body>
+  <section id="stopwatch">
+    <h1>Let's go!</h1>
+    <div class="clearfix display">
+      <div id="minutes" class="display__elements">00 : </div>
+      <div id="seconds" class="display__elements">00 : </div>
+      <div id="milliseconds" class="display__elements">000</div>
+    </div>
+    <div class="clearfix buttons">
+      <button id="start" class="display__elements">Start</button>
+      <button id="pause" class="display__elements">Pause</button>
+      <button id="reset" class="display__elements">Reset</button>
+    </div>
+  </section>
+
+  <!-- source files -->
+  <script src="src/Stopwatch.js"></script>
+  <!-- spec file -->
+  <script src="spec/StopwatchSpec.js"></script>
+
 </body>
 </html>

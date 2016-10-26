@@ -1,0 +1,17 @@
+.jasmine_html-reporter {
+  clear:both;
+}
+
+.display__elements {
+  float:left;
+  height:30px;
+}
+
+.display, .buttons {
+  width:100vw;
+  margin-bottom: 10px;
+}
+
+.clearfix {
+  overflow:auto;
+}

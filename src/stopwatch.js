@@ -4,18 +4,28 @@ function Stopwatch(id){
     var that = this;
 
     this.id = id;
+    this.pauseTime = 0;
 
     this.elt = document.getElementById(id);
-    this.elt.innerHTML = "<span id='time'>00:00:00:000</span><button id='start' name='start'>Start</button><button id='clear' name='clear'>Clear</button>";
+    this.elt.innerHTML = "<span id='time'>00:00:00:000</span> \
+      <button id='start' name='start'>Start</button> \
+      <button id='pause' name='pause'>Pause</button> \
+      <button id='clear' name='clear'>Clear</button>";
 
     this.timeElt = document.getElementById('time');
     this.buttonStartElt = document.getElementById('start');
+    this.buttonPauseElt = document.getElementById('pause');
     this.buttonClearElt = document.getElementById('clear');
 
     //* Event handlers *//
     /* Start button */
     this.buttonStartElt.addEventListener("click", function(){
         that.start();
+    })
+
+    /* Pause button */
+    this.buttonPauseElt.addEventListener('click', function() {
+        that.pause();
     })
 
     /* Clear Button */
@@ -29,9 +39,15 @@ function Stopwatch(id){
         that.updateTimeField();
     }
 
+    this.pause = function() {
+        window.clearInterval(that.timer);
+        that.pauseTime = new Date();
+    }
+
     this.clear = function() {
         window.clearInterval(that.timer);
-        that.timeElt.textContent = "00:00:00:000";
+        that.pauseTime = 0;
+        that.timeElt.textContent = that.convertMsToTime(0);
     }
 
 

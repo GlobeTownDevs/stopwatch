@@ -13,6 +13,10 @@ describe("Stopwatch", function() {
       expect(document.getElementById('start')).toBeTruthy();
     });
 
+    it("Adds pause button into html (into div with id 'stopwatch')", function() {
+      expect(document.getElementById('pause')).toBeTruthy();
+    })
+
     it("Adds clear button into html (into div with id 'stopwatch')", function() {
       expect(document.getElementById('clear')).toBeTruthy();
     });
@@ -42,16 +46,46 @@ describe("Stopwatch", function() {
      it("should be able to format 134 milliseconds to 00:00:00:134", function(){
         var formatted = this.stopwatch.convertMsToTime(134);
         expect(formatted).toBe('00:00:00:134');
-     })
+     });
 
      it("should be able to format 6 seconds to 00:00:06:000", function(){
         var formatted = this.stopwatch.convertMsToTime(6000);
         expect(formatted).toBe('00:00:06:000');
-     })
+     });
 
      it("should be able to format 1 hour, 2 minutes, 30 seconds, 14 milliseconds to 01:02:30:014", function(){
         var formatted = this.stopwatch.convertMsToTime(3750014);
         expect(formatted).toBe('01:02:30:014');
-     })
+     });
+  });
+
+  describe("Async tests", function() {
+    it("should run for one second", function(done) {
+      var stopwatch = this.stopwatch;
+      stopwatch.start();
+      window.setTimeout(function() {
+        stopwatch.pause();
+        var timeDiff = stopwatch.pauseTime - stopwatch.startTime;
+        expect(timeDiff/10).toBeCloseTo(100, 0);
+        done();
+      }, 1000);
+    });
+
+    it("should have of three seconds when run for one second, paused, run again for one second", function(done) {
+      var stopwatch = this.stopwatch;
+      stopwatch.start();
+      window.setTimeout(function() {
+        stopwatch.pause();
+      }, 1000);
+      window.setTimeout(function() {
+        stopwatch.start();
+      }, 1000);
+      window.setTimeout(function() {
+        stopwatch.pause();
+        var timeDiff = stopwatch.pauseTime - stopwatch.startTime;
+        expect(timeDiff/10).toBeCloseTo(300, 0);
+        done();
+      }, 1000);
+    });
   });
 });

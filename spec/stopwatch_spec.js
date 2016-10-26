@@ -33,6 +33,25 @@ describe("Stopwatch", function() {
 
   });
 
-  describe('Async tests', function() {
+  describe('ms-to-time tests', function() {
+      it("should be able to format 6 milliseconds to 00:00:00:006", function(){
+         var formatted = this.stopwatch.convertMsToTime(6);
+         expect(formatted).toBe('00:00:00:006');
+     });
+
+     it("should be able to format 134 milliseconds to 00:00:00:134", function(){
+        var formatted = this.stopwatch.convertMsToTime(134);
+        expect(formatted).toBe('00:00:00:134');
+     })
+
+     it("should be able to format 6 seconds to 00:00:06:000", function(){
+        var formatted = this.stopwatch.convertMsToTime(6000);
+        expect(formatted).toBe('00:00:06:000');
+     })
+
+     it("should be able to format 1 hour, 2 minutes, 30 seconds, 14 milliseconds to 01:02:30:014", function(){
+        var formatted = this.stopwatch.convertMsToTime(3750014);
+        expect(formatted).toBe('01:02:30:014');
+     })
   });
 });

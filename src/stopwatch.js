@@ -34,11 +34,27 @@ function Stopwatch(id){
         that.timeElt.textContent = "00:00:00:000";
     }
 
+
     this.updateTimeField = function() {
         that.timer = window.setInterval(function() {
-          that.timeElt.textContent = that.getTimeDiff()
-          ;
+          that.timeElt.textContent = that.convertMsToTime(that.getTimeDiff());
         }, 10);
+    }
+
+    /* e.g 6 will convert to 00:00:00:006 */
+    this.convertMsToTime = function(duration){
+        var milliseconds = parseInt((duration%1000)),
+            seconds = parseInt((duration/1000)%60),
+            minutes = parseInt((duration/(1000*60))%60),
+            hours = parseInt((duration/(1000*60*60))%24);
+
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            milliseconds = (milliseconds < 100) ? "0" + milliseconds : milliseconds;
+            milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
+
+        return hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
     }
 
     this.getTimeDiff = function() {

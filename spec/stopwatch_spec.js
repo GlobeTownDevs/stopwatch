@@ -16,6 +16,21 @@ describe("Stopwatch", function() {
     it("Adds clear button into html (into div with id 'stopwatch')", function() {
       expect(document.getElementById('clear')).toBeTruthy();
     });
-  });
+
+    it('time element should initially display 00:00:00:000', function(){
+        expect(document.getElementById('time').textContent).toBe('00:00:00:000');
+    });
+
+});
+
+describe('basic tests', function(){
+    it("should update stopwatch DOM element when start method called", function(){
+        var initial = document.getElementById('time').textContent;
+        this.stopwatch.start();
+        expect(document.getElementById('time').textContent).not.toBe(initial);
+    })
+
+})
+
 
 });

@@ -21,15 +21,29 @@ function Stopwatch(id){
     /* Clear Button */
     this.buttonClearElt.addEventListener("click", function(){
         that.clear();
-    })
+    });
 
-    this.start = function(){
-        that.timeElt.textContent = "00:00:00:001";
+
+    this.start = function() {
+        that.startTime = new Date();
+        that.updateTimeField();
     }
 
-    this.clear = function(){
-
+    this.clear = function() {
+        window.clearInterval(that.timer);
+        that.timeElt.textContent = "00:00:00:000";
     }
 
+    this.updateTimeField = function() {
+        that.timer = window.setInterval(function() {
+          that.timeElt.textContent = that.getTimeDiff()
+          ;
+        }, 10);
+    }
+
+    this.getTimeDiff = function() {
+        var currentTime = new Date();
+        return currentTime - that.startTime;
+    }
 
 }

@@ -21,16 +21,18 @@ describe("Stopwatch", function() {
         expect(document.getElementById('time').textContent).toBe('00:00:00:000');
     });
 
-});
+  });
 
-describe('basic tests', function(){
-    it("should update stopwatch DOM element when start method called", function(){
+  describe('basic tests', function(){
+      it("should reset the time DOM element when clear method called", function() {
         var initial = document.getElementById('time').textContent;
         this.stopwatch.start();
-        expect(document.getElementById('time').textContent).not.toBe(initial);
-    })
+        this.stopwatch.clear();
+        expect(document.getElementById('time').textContent).toBe(initial);
+      });
 
-})
+  });
 
-
+  describe('Async tests', function() {
+  });
 });

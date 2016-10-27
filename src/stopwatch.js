@@ -4,7 +4,6 @@ function Stopwatch(id){
     var startTime = this.startTime = 0;
     var pausedAt = this.pausedAt = 0;
     var that = this;
-  
 
     var elt = document.getElementById(id);
     elt.innerHTML = "<span id='time'>00:00:00:000</span> \
@@ -31,24 +30,24 @@ function Stopwatch(id){
     });
 
     this.start = function() {
-        if(!startTime) {
-          startTime = Date.now();
+        if(!this.startTime) {
+          this.startTime = Date.now();
         }
-        if(pausedAt) {
-          startTime = Date.now() - (pausedAt - startTime);
+        if(this.pausedAt) {
+          this.startTime = Date.now() - (this.pausedAt - this.startTime);
         }
         this.updateTimeField();
     };
 
     this.pause = function() {
         window.clearInterval(this.timer);
-        pausedAt = Date.now();
+        this.pausedAt = Date.now();
     };
 
     this.clear = function() {
-        window.clearInterval(that.timer);
-        pausedAt = 0;
-        startTime = 0;
+        window.clearInterval(this.timer);
+        this.pausedAt = 0;
+        this.startTime = 0;
         timeElt.textContent = this.convertMsToTime(0);
     };
 
@@ -76,7 +75,6 @@ function Stopwatch(id){
     }
 
     this.getTimeDiff = function() {
-        return Date.now() - startTime;
+        return Date.now() - this.startTime;
     }
-
 }

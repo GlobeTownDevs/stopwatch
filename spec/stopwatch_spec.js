@@ -63,11 +63,7 @@ QUnit.module("Button trigger tests", {
         var stopwatch = this.stopwatch;
         var done = assert.async();
         var startBtn = document.getElementById('start');
-
-        /* Create click Event object, dispatch that event to start button */
-        var evObj = document.createEvent('Events');
-        evObj.initEvent('click', true, false);
-        startBtn.dispatchEvent(evObj);
+        startBtn.click();
 
         window.setTimeout(function() {
             assert.ok(document.getElementById('time').innerHTML != '00:00:00:000');
@@ -80,11 +76,7 @@ QUnit.module("Button trigger tests", {
         var stopwatch = this.stopwatch;
         var pauseBtn = document.getElementById('pause');
         stopwatch.start();
-
-        /* Simulates clicking pause button */
-        var evObj = document.createEvent('Events');
-        evObj.initEvent('click', true, false);
-        pauseBtn.dispatchEvent(evObj);
+        pauseBtn.click();
         assert.ok(document.getElementById('pause').disabled === true);
     });
     /* Clear Button */
@@ -93,11 +85,7 @@ QUnit.module("Button trigger tests", {
         var clearBtn = document.getElementById('clear');
         var timeDisplay = document.getElementById('time');
         timeDisplay.textContent = "I'M A TEAPOT";
-
-        /* Simulates clear button */
-        var evObj = document.createEvent('Events');
-        evObj.initEvent('click', true, false);
-        clearBtn.dispatchEvent(evObj);
+        clearBtn.click()
 
         assert.equal(document.getElementById('time').textContent, '00:00:00:000');
     });

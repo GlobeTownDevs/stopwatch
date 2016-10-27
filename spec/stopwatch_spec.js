@@ -65,7 +65,7 @@ describe("Stopwatch", function() {
       stopwatch.start();
       window.setTimeout(function() {
         stopwatch.pause();
-        var timeDiff = stopwatch.pauseTime - stopwatch.startTime;
+        var timeDiff = stopwatch.pausedAt - stopwatch.startTime;
         expect(timeDiff/10).toBeCloseTo(100, 0);
         done();
       }, 1000);
@@ -82,7 +82,7 @@ describe("Stopwatch", function() {
       }, 1000);
       window.setTimeout(function() {
         stopwatch.pause();
-        var timeDiff = stopwatch.pauseTime - stopwatch.startTime;
+        var timeDiff = stopwatch.pausedAt- stopwatch.startTime;
         expect(timeDiff/10).toBeCloseTo(300, 0);
         done();
       }, 1000);

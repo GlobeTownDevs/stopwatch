@@ -3,9 +3,10 @@ window.onload(function(){
 });
 
 var isPaused = true;
-var ms = document.getElementById("milliseconds");
-var startingTime, currentTime, milliseconds;
-console.log(document, ms);
+var ms = document.getElementById('milliseconds');
+var s = document.getElementById('seconds');
+var min = document.getElementById('minutes');
+var startingTime, currentTime, time, milliseconds, seconds, minutes;
 
 var stopwatch = {
   startTimer: function() {
@@ -26,11 +27,23 @@ var stopwatch = {
 setInterval(function(){
   console.log('setInterval isPaused = ' + isPaused);
   if(!isPaused) {
+    //rules for time
     currentTime = new Date();
-    milliseconds = currentTime - startingTime;
+    time = currentTime - startingTime;
+    milliseconds = Math.floor((time%1000)/10);
+    seconds = (Math.floor(time/1000))%60;
+    minutes = Math.floor(Math.floor(time/1000)/60);
+    //update DOM & appearance
     ms.innerHTML = milliseconds;
+    (seconds < 10)? s.innerHTML = '0' + seconds : s.innerHTML = seconds;
+    (minutes < 10)? min.innerHTML = '0' + minutes : min.innerHTML = minutes;
+    if(minutes > 60) {
+      min.innerHTML = 60;
+      s.innerHTML = '00';
+      ms.innerHTML = '00';
+    }
   }
-},1000);
+},10);
 
 document.getElementById('pause').addEventListener('click', function(e){
   e.preventDefault();

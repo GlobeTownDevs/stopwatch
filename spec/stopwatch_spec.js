@@ -60,6 +60,8 @@ QUnit.module("MS-to-Time function tests", {
    });
 
 
+/* Counter display checks */
+
 
 /* Async tests */
 QUnit.module("Async tests", {

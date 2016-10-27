@@ -6,21 +6,25 @@ var isPaused = true;
 var ms = document.getElementById('milliseconds');
 var s = document.getElementById('seconds');
 var min = document.getElementById('minutes');
-var startingTime, currentTime, time, milliseconds, seconds, minutes;
+var startingTime, currentTime, pauseTime = 0, time, milliseconds, seconds, minutes;
 
 var stopwatch = {
   startTimer: function() {
+    startingTime = startingTime || Date.now();
+    pauseTime = pauseTime || 0;
     isPaused = false;
-    startingTime = startingTime || new Date();
   },
   stopTimer: function() {
     isPaused = true;
-    startingTime = currentTime;
+    pauseTime = currentTime;
   },
   resetTimer: function() {
     isPaused = true;
     startingTime = null;
-    ms.innerHTML = 000;
+    pauseTime = 0;
+    ms.innerHTML = '00';
+    s.innerHTML = '00';
+    min.innerHTML = '00';
   }
 }
 
@@ -28,15 +32,21 @@ setInterval(function(){
   console.log('setInterval isPaused = ' + isPaused);
   if(!isPaused) {
     //rules for time
-    currentTime = new Date();
-    time = currentTime - startingTime;
+    currentTime = Date.now();
+    time = (currentTime - startingTime);
     milliseconds = Math.floor((time%1000)/10);
     seconds = (Math.floor(time/1000))%60;
     minutes = Math.floor(Math.floor(time/1000)/60);
     //update DOM & appearance
     ms.innerHTML = milliseconds;
+    //diplay milliseconds
+    if(milliseconds === 0) ms.innerHTML = '00';
+    else if(milliseconds < 10) ms.innerHTML = '0' + milliseconds;
+    else ms.innerHTML = milliseconds;
+    //display secons and minutes
     (seconds < 10)? s.innerHTML = '0' + seconds : s.innerHTML = seconds;
     (minutes < 10)? min.innerHTML = '0' + minutes : min.innerHTML = minutes;
+    //display when stopwatch finishes
     if(minutes > 60) {
       min.innerHTML = 60;
       s.innerHTML = '00';

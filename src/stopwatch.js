@@ -1,11 +1,20 @@
 /* holds stopwatch function */
 function Stopwatch(id){
 
-    var startTime = this.counterInit = 0;
+    /* holds a setInterval object*/
+    var timer;
+
+    /* Time from birth */
+    var counterInit = this.counterInit = 0;
+    /* Time from pause */
     var pausedAt = this.pausedAt = 0;
-    var restartTime = this.startTime = 0;
+    /* Time from go */
+    var startTime = this.startTime = 0;
+
+    /* Global this hack */
     var that = this;
 
+    /* DOM Setup */
     var elt = document.getElementById(id);
     elt.innerHTML = "<span id='time'>00:00:00:000</span> \
       <button id='start' name='start'>Start</button> \
@@ -30,53 +39,55 @@ function Stopwatch(id){
         that.clear();
     });
 
-    this.start = function() {
-        if(!this.counterInit) {
-          this.counterInit = this.startTime = Date.now();
-      } else {
-          this.startTime = Date.now() - (this.pausedAt - this.startTime);
-      }
+    // Date.now.from1970 = function(){return Date.now()}
 
-        this.updateTimeField();
+    /* Sets initial time when first called */
+    /* When calling after paused, updates startTime to factor in pause length*/
+    this.start = function() {
+        if (!this.counterInit) {
+            this.counterInit = this.startTime = Date.now();
+        }   else {
+            this.startTime = Date.now() - (this.pausedAt - this.startTime);
+        }
+        startPaint(this.startTime);
     };
 
+    /* Stops browser painting & triggers new pausedAt time */
     this.pause = function() {
-        window.clearInterval(this.timer);
+        stopPaint();
         this.pausedAt = Date.now();
     };
 
+    /* Resets all */
     this.clear = function() {
-        window.clearInterval(this.timer);
+        stopPaint();
         this.counterInit = this.startTime = this.pausedAt = 0;
-        timeElt.textContent = this.convertMsToTime(0);
+        timeElt.textContent = convertMsToTime(0);
     };
 
-    this.updateTimeField = function(startTime) {
-        var that = this;
-        this.timer = window.setInterval(function() {
-          timeElt.textContent = that.convertMsToTime(that.getTimeDiff());
+    /* Paints browser with formatted time every 10ms */
+    var startPaint = function(startTime) {
+
+        timer = window.setInterval(function() {
+          timeElt.textContent = convertMsToTime(getTimeDiff(startTime));
         }, 10);
     };
 
-    /* e.g 6 will convert to 00:00:00:006 */
-    this.convertMsToTime = function(duration){
-        var milliseconds = parseInt((duration%1000)),
-            seconds = parseInt((duration/1000)%60),
-            minutes = parseInt((duration/(1000*60))%60),
-            hours = parseInt((duration/(1000*60*60))%24);
-
-            hours = (hours < 10) ? "0" + hours : hours;
-            minutes = (minutes < 10) ? "0" + minutes : minutes;
-            seconds = (seconds < 10) ? "0" + seconds : seconds;
-            milliseconds = (milliseconds < 100) ? "0" + milliseconds : milliseconds;
-            milliseconds = (milliseconds < 10) ? "0" + milliseconds : milliseconds;
-
-        return hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
+    /* Ceases painting */
+    var stopPaint = function(){
+        window.clearInterval(timer);
     }
 
-    this.getTimeDiff = function() {
+    /* e.g 6 will convert to 00:00:00:006 */
+    var convertMsToTime = this.convertMsToTime = function(duration){
 
-        return Date.now() - this.startTime;
+        var fullFormat = new Date(duration).toISOString();
+        return fullFormat.replace(/.*(\d{2}:\d{2}:\d{2}).(\d{3}).*/g, '$1:$2');
 
+    }
+
+    /* Calculates accurate difference between current & startTime */
+    var getTimeDiff = function(startTime) {
+        return Date.now() - startTime;
     }
 }

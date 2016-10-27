@@ -79,13 +79,13 @@ describe("Stopwatch", function() {
       }, 1000);
       window.setTimeout(function() {
         stopwatch.start();
-      }, 1000);
+    }, 2000);
       window.setTimeout(function() {
         stopwatch.pause();
         var timeDiff = stopwatch.pausedAt- stopwatch.startTime;
         expect(timeDiff/10).toBeCloseTo(300, 0);
         done();
-      }, 1000);
+    }, 3000);
     });
   });
 });

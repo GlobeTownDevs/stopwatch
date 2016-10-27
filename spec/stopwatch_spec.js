@@ -5,100 +5,28 @@ QUnit.module("Stopwatch", {
     }
 });
 
-QUnit.test("Renders span element into div", function(assert) {
-    //var stopwatch = new Stopwatch("stopwatch");
+QUnit.test("renders span element into div", function(assert) {
     assert.ok(document.getElementById('time'));
 });
 
+QUnit.test("adds start button", function(assert) {
+    assert.ok(document.getElementById('start'));
+});
 
-/*
-describe("Stopwatch", function() {
-  beforeEach(function() {
-    this.stopwatch = new Stopwatch("stopwatch");
-  });
+QUnit.test("adds clear button", function(assert) {
+    assert.ok(document.getElementById('clear'));
+});
 
-  describe("initialisation", function() {
-    it("should render span element for time into div", function() {
-      expect(document.getElementById('time')).toBeTruthy();
-    });
+QUnit.test("adds pause button", function(assert) {
+    assert.ok(document.getElementById('pause'));
+});
 
-    it("Adds start button into html (into div with id 'stopwatch')", function() {
-      expect(document.getElementById('start')).toBeTruthy();
-    });
+QUnit.test("sets time element to '00:00:00:000'", function(assert) {
+    assert.equal(document.getElementById('time').textContent, '00:00:00:000');
+});
 
-    it("Adds pause button into html (into div with id 'stopwatch')", function() {
-      expect(document.getElementById('pause')).toBeTruthy();
-    })
-
-    it("Adds clear button into html (into div with id 'stopwatch')", function() {
-      expect(document.getElementById('clear')).toBeTruthy();
-    });
-
-    it('time element should initially display 00:00:00:000', function(){
-        expect(document.getElementById('time').textContent).toBe('00:00:00:000');
-    });
-
-  });
-
-  describe('basic tests', function(){
-      it("should reset the time DOM element when clear method called", function() {
-        var initial = document.getElementById('time').textContent;
-        this.stopwatch.start();
-        this.stopwatch.clear();
-        expect(document.getElementById('time').textContent).toBe(initial);
-      });
-
-  });
-
-  describe('ms-to-time tests', function() {
-      it("should be able to format 6 milliseconds to 00:00:00:006", function(){
-         var formatted = this.stopwatch.convertMsToTime(6);
-         expect(formatted).toBe('00:00:00:006');
-     });
-
-     it("should be able to format 134 milliseconds to 00:00:00:134", function(){
-        var formatted = this.stopwatch.convertMsToTime(134);
-        expect(formatted).toBe('00:00:00:134');
-     });
-
-     it("should be able to format 6 seconds to 00:00:06:000", function(){
-        var formatted = this.stopwatch.convertMsToTime(6000);
-        expect(formatted).toBe('00:00:06:000');
-     });
-
-     it("should be able to format 1 hour, 2 minutes, 30 seconds, 14 milliseconds to 01:02:30:014", function(){
-        var formatted = this.stopwatch.convertMsToTime(3750014);
-        expect(formatted).toBe('01:02:30:014');
-     });
-  });
-
-  describe("Async tests", function() {
-    it("should run for one second", function(done) {
-      var stopwatch = this.stopwatch;
-      stopwatch.start();
-      window.setTimeout(function() {
-        stopwatch.pause();
-        var timeDiff = stopwatch.pausedAt - stopwatch.startTime;
-        expect(timeDiff/10).toBeCloseTo(100, 0);
-        done();
-      }, 1000);
-    });
-
-    it("should have of three seconds when run for one second, paused, run again for one second", function(done) {
-      var stopwatch = this.stopwatch;
-      stopwatch.start();
-      window.setTimeout(function() {
-        stopwatch.pause();
-      }, 1000);
-      window.setTimeout(function() {
-        stopwatch.start();
-      }, 2000);
-      window.setTimeout(function() {
-        stopwatch.pause();
-        var timeDiff = stopwatch.pausedAt- stopwatch.counterInit;
-        expect(timeDiff/10).toBeCloseTo(300, 0);
-        done();
-      }, 3000);
-    });
-  });
-});*/
+QUnit.test("resets the time element when clear is called", function(assert) {
+    this.stopwatch.start();
+    this.stopwatch.clear();
+    assert.equal(document.getElementById('time').textContent, '00:00:00:000');
+});

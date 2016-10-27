@@ -1,9 +1,9 @@
 /* holds stopwatch function */
 function Stopwatch(id){
 
-    var startTime = this.startTime = 0;
+    var startTime = this.counterInit = 0;
     var pausedAt = this.pausedAt = 0;
-    var restartTime = this.restartTime = 0;
+    var restartTime = this.startTime = 0;
     var that = this;
 
     var elt = document.getElementById(id);
@@ -31,10 +31,10 @@ function Stopwatch(id){
     });
 
     this.start = function() {
-        if(!this.startTime) {
-          this.startTime = this.restartTime = Date.now();
+        if(!this.counterInit) {
+          this.counterInit = this.startTime = Date.now();
       } else {
-          this.restartTime = Date.now() - (this.pausedAt - this.restartTime);
+          this.startTime = Date.now() - (this.pausedAt - this.startTime);
       }
 
         this.updateTimeField();
@@ -47,7 +47,7 @@ function Stopwatch(id){
 
     this.clear = function() {
         window.clearInterval(this.timer);
-        this.startTime = this.restartTime = this.pausedAt = 0;
+        this.counterInit = this.startTime = this.pausedAt = 0;
         timeElt.textContent = this.convertMsToTime(0);
     };
 
@@ -76,7 +76,7 @@ function Stopwatch(id){
 
     this.getTimeDiff = function() {
 
-        return Date.now() - this.restartTime;
+        return Date.now() - this.startTime;
 
     }
 }

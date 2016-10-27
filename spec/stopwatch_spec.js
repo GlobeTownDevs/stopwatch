@@ -68,6 +68,27 @@ QUnit.module("Async tests", {
    }
 });
 
+QUnit.test("Counter should be non-zero after running for 0.5s", function(assert) {
+    var done = assert.async();
+    var stopwatch = this.stopwatch;
+    stopwatch.start();
+    window.setTimeout(function() {
+        stopwatch.pause();
+        assert.notEqual(document.getElementById('time').textContent, '00:00:00:000');
+        done();
+    }, 500);
+});
+
+QUnit.test("Counter should not show NaN after running for 0.5s", function(assert) {
+    var done = assert.async();
+    var stopwatch = this.stopwatch;
+    stopwatch.start();
+    window.setTimeout(function() {
+        stopwatch.pause();
+        assert.notEqual(document.getElementById('time').textContent, 'NaNNaN:NaNNaN:NaNNaN:NaNNaNNaN');
+        done();
+    }, 500);
+});
 
 QUnit.test("Can run for one second then stop. Counter should display between 990-1010 ms", function(assert) {
     var stopwatch = this.stopwatch;

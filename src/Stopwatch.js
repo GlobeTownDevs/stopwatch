@@ -1,27 +1,24 @@
-window.onload(function(){
-  isPaused = true;
-});
-
 var isPaused = true;
 var ms = document.getElementById('milliseconds');
 var s = document.getElementById('seconds');
 var min = document.getElementById('minutes');
-var startingTime, currentTime, pauseTime = 0, time, milliseconds, seconds, minutes;
+var startingTime, currentTime, pauseTime, time, milliseconds, seconds, minutes;
 
 var stopwatch = {
   startTimer: function() {
-    startingTime = startingTime || Date.now();
+    startingTime = startingTime || new Date();
     pauseTime = pauseTime || 0;
     isPaused = false;
   },
   stopTimer: function() {
     isPaused = true;
-    pauseTime = currentTime;
+    pauseTime = time;
+    startingTime = null;
   },
   resetTimer: function() {
     isPaused = true;
     startingTime = null;
-    pauseTime = 0;
+    pauseTime = null;
     ms.innerHTML = '00';
     s.innerHTML = '00';
     min.innerHTML = '00';
@@ -32,8 +29,8 @@ setInterval(function(){
   console.log('setInterval isPaused = ' + isPaused);
   if(!isPaused) {
     //rules for time
-    currentTime = Date.now();
-    time = (currentTime - startingTime);
+    currentTime = new Date();
+    time = currentTime - startingTime + pauseTime;
     milliseconds = Math.floor((time%1000)/10);
     seconds = (Math.floor(time/1000))%60;
     minutes = Math.floor(Math.floor(time/1000)/60);

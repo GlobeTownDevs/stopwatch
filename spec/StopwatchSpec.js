@@ -27,7 +27,7 @@ describe("Basic tests when starting the stopwatch", function() {
 
   it('should be able to get a starting time', function() {
     stopwatch.startTimer();
-    expect(startingTime).toBe(Date.now());
+    expect(startingTime).toEqual(new Date());
       });
 
   it('should be able to display milliseconds',function() {
@@ -45,7 +45,7 @@ describe("Basic tests when starting the stopwatch", function() {
 
   it('should have a variable that captures the time on pausing', function(){
     stopwatch.stopTimer();
-    expect(pauseTime).toBe(currentTime);
+    expect(pauseTime).toBe(time);
   });
 
 });

@@ -31,6 +31,25 @@ QUnit.module("Basic setup tests", {
         assert.equal(document.getElementById('time').textContent, '00:00:00:000');
     });
 
+    QUnit.test("Pause button is initially disabled", function(assert) {
+        assert.ok(document.getElementById('pause').disabled === true);
+    });
+
+    QUnit.test("After stopwatch has started, pause button is not disabled", function(assert) {
+        this.stopwatch.start();
+        assert.ok(document.getElementById('pause').disabled === false);
+        this.stopwatch.clear();
+    });
+
+    QUnit.test("After stopwatch started, pause disabled, when running start again pause is enabled", function(assert) {
+        this.stopwatch.start();
+        this.stopwatch.pause();
+        assert.ok(document.getElementById('pause').disabled === true);
+        this.stopwatch.start();
+        assert.ok(document.getElementById('pause').disabled === false);
+        this.stopwatch.clear();
+    });
+
 
 /* Time conversion tests */
 QUnit.module("MS-to-Time function tests", {

@@ -91,3 +91,6 @@ function Stopwatch(id){
         return Date.now() - startTime;
     }
 }
+
+Stopwatch("stopwatch");
+

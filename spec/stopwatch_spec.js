@@ -1,4 +1,17 @@
-/* holds all jasmine test */
+
+QUnit.module("Stopwatch", {
+    beforeEach: function() {
+        this.stopwatch = new Stopwatch('stopwatch');
+    }
+});
+
+QUnit.test("Renders span element into div", function(assert) {
+    //var stopwatch = new Stopwatch("stopwatch");
+    assert.ok(document.getElementById('time'));
+});
+
+
+/*
 describe("Stopwatch", function() {
   beforeEach(function() {
     this.stopwatch = new Stopwatch("stopwatch");
@@ -79,13 +92,13 @@ describe("Stopwatch", function() {
       }, 1000);
       window.setTimeout(function() {
         stopwatch.start();
-    }, 2000);
+      }, 2000);
       window.setTimeout(function() {
         stopwatch.pause();
         var timeDiff = stopwatch.pausedAt- stopwatch.counterInit;
         expect(timeDiff/10).toBeCloseTo(300, 0);
         done();
-    }, 3000);
+      }, 3000);
     });
   });
-});
+});*/

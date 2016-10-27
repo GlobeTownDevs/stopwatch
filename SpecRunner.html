@@ -4,23 +4,16 @@
   <meta charset="utf-8">
   <title>Jasmine Spec Runner v2.3.4</title>
 
-  <!--<link rel="shortcut icon" type="image/png" href="lib/jasmine-2.3.4/jasmine_favicon.png">-->
-  <link rel="stylesheet" href="./lib/jasmine-core/lib/jasmine-core/jasmine.css">
-
-  <script src="./lib/jasmine-core/lib/jasmine-core/jasmine.js"></script>
-  <script src="./lib/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
-  <script src="./lib/jasmine-core/lib/jasmine-core/boot.js"></script>
-
-  <!-- include source files here... -->
-  <script src="./src/stopwatch.js"></script>
-
-  <!-- include spec files here... -->
-
-  <script src="./spec/stopwatch_spec.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
 
 </head>
 
 <body>
   <div id="stopwatch"></div>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+  <script src="./spec/stopwatch_spec.js"></script>
+  <script src="./src/stopwatch.js"></script>
 </body>
 </html>

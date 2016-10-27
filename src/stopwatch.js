@@ -47,9 +47,6 @@ function Stopwatch(id){
         btn.disabled = true;
     }
 
-
-
-
     /* Sets initial time when first called */
     /* When calling after paused, updates startTime to factor in pause length*/
     this.start = function() {

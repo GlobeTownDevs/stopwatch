@@ -15,7 +15,7 @@ function Stopwatch(id){
 
     /* DOM Setup */
     var elt = document.getElementById(id);
-    elt.innerHTML = "<span id='time'>00:00:00:000</span> \
+    elt.innerHTML = "<span id='time'>00:00:00:000</span><br> \
       <button id='start' name='start'>Start</button> \
       <button id='pause' name='pause' disabled>Pause</button> \
       <button id='clear' name='clear'>Clear</button>";

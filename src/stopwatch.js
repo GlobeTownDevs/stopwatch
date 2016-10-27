@@ -3,8 +3,8 @@ function Stopwatch(id){
 
     var that = this;
 
-    this.id = id;
-    this.pauseTime = 0;
+    var startTime = 0;
+    var pausedAt = 0;
 
     this.elt = document.getElementById(id);
     this.elt.innerHTML = "<span id='time'>00:00:00:000</span> \
@@ -33,25 +33,30 @@ function Stopwatch(id){
         that.clear();
     });
 
-
     this.start = function() {
-        that.startTime = new Date();
+        console.log(startTime, pausedAt);
+        if(!startTime) {
+          startTime = Date.now();
+        }
+        if(pausedAt) {
+          startTime = Date.now() - (pausedAt - startTime);
+        }
         that.updateTimeField();
     }
 
     this.pause = function() {
         window.clearInterval(that.timer);
-        that.pauseTime = new Date();
+        pausedAt = Date.now();
     }
 
     this.clear = function() {
         window.clearInterval(that.timer);
-        that.pauseTime = 0;
+        pausedAt = 0;
+        startTime = 0;
         that.timeElt.textContent = that.convertMsToTime(0);
     }
 
-
-    this.updateTimeField = function() {
+    this.updateTimeField = function(startTime) {
         that.timer = window.setInterval(function() {
           that.timeElt.textContent = that.convertMsToTime(that.getTimeDiff());
         }, 10);
@@ -74,8 +79,7 @@ function Stopwatch(id){
     }
 
     this.getTimeDiff = function() {
-        var currentTime = new Date();
-        return currentTime - that.startTime;
+        return Date.now() - startTime;
     }
 
 }

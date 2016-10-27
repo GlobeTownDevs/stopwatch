@@ -18,7 +18,7 @@ function Stopwatch(id){
     var elt = document.getElementById(id);
     elt.innerHTML = "<span id='time'>00:00:00:000</span> \
       <button id='start' name='start'>Start</button> \
-      <button id='pause' name='pause'>Pause</button> \
+      <button id='pause' name='pause' disabled>Pause</button> \
       <button id='clear' name='clear'>Clear</button>";
 
     var timeElt = document.getElementById('time');

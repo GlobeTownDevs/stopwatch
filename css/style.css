@@ -1,0 +1,200 @@
+/* base */
+* {
+    box-sizing: border-box; 
+}
+
+/* For pseudo elements */
+:before,
+:after {
+    content: "";
+    display: block;
+    position: absolute;
+}
+
+
+/******* Stopwatch *******/
+
+
+/*** Body ***/
+
+/* _base */
+#stopwatch {
+    font-size: 1rem;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 15rem;
+    margin: 2em auto 7em auto;
+    padding: 1em;
+    height: 12em;
+    background: rgb(160,160,160);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: right;
+    -ms-transform-origin: right;
+    transform-origin: right;
+    -webkit-animation: bigRotate 8s ease forwards;
+    animation: bigRotate 8s ease forwards;
+}
+
+
+/* _side panels */
+#stopwatch:before {
+    width: 3em;
+    height: inherit;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: -3em;
+    -webkit-transform-origin: right;
+    -ms-transform-origin: right;
+    transform-origin: right;
+    -webkit-transform: rotate3d(0,-1,0,90deg);
+    transform: rotate3d(0,-1,0,90deg);
+}
+#stopwatch:after {
+    width: inherit;
+    height: 3em;
+    background: rgba(0,0,0,0.2);
+    top: -3em;
+    left: 0;
+    -webkit-transform-origin: bottom;
+    -ms-transform-origin: bottom;
+    transform-origin: bottom;
+    -webkit-transform: rotate3d(1,0,0,90deg);
+    transform: rotate3d(1,0,0,90deg);
+}
+
+
+/* _3d rotation */
+@-webkit-keyframes bigRotate {
+    70% {-webkit-transform: perspective(0px) rotate3d(0,0,0,0);transform: perspective(0px) rotate3d(0,0,0,0);}
+    100% {-webkit-transform: perspective(800px) rotate3d(-1,2,-.3,45deg);transform: perspective(800px) rotate3d(-1,2,-.3,45deg);}
+}
+@keyframes bigRotate {
+    70% {-webkit-transform: perspective(0px) rotate3d(0,0,0,0);transform: perspective(0px) rotate3d(0,0,0,0);}
+    100% {-webkit-transform: perspective(800px) rotate3d(-1,2,-.3,45deg);transform: perspective(800px) rotate3d(-1,2,-.3,45deg);}
+}
+
+
+
+/*** Time Display ***/
+/* _base */
+#time {
+    display: block;
+    width: 100%;
+    position: relative;
+    height: 4.5rem;
+    padding: .5em;
+    font-size: 2em;
+    font-family: monospace;
+    background: linear-gradient(to right, rgba(0,255,0,0.2),rgba(255,255,255,0.3),rgba(0,255,0,0.2));
+    border: none;
+    text-align: center;
+    margin-bottom: 1em;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: perspective(800px) translateZ(.75rem);
+    transform: perspective(800px) translateZ(.75rem);
+}
+
+/* _side panels */
+#time:after {
+    width: .75rem;
+    height: inherit;
+    background: rgba(0,100,0,0.3);
+    top: 0;
+    left: -.75rem;
+    -webkit-transform-origin: right;
+    -ms-transform-origin: right;
+    transform-origin: right;
+    -webkit-transform: rotate3d(0,-1,0,90deg);
+    transform: rotate3d(0,-1,0,90deg);
+}
+#time:before {
+    width: inherit;
+    height: .75rem;
+    background: rgba(0,100,0,0.1);
+    top: -.75rem;
+    left: 0;
+    -webkit-transform-origin: bottom;
+    -ms-transform-origin: bottom;
+    transform-origin: bottom;
+    -webkit-transform: rotate3d(1,0,0,90deg);
+    transform: rotate3d(1,0,0,90deg);  
+}
+
+
+
+/*** Buttons ***/
+
+/* _base */
+#start, 
+#pause, 
+#clear {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 2rem;
+    background: rgb(130,130,130);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(1.5rem);
+    transform: translateZ(1.5rem);
+    border: 0;
+    margin: .1rem;
+    cursor: pointer;
+    color: white;
+}
+
+/* _side panels */
+#start:before,
+#pause:before,
+#clear:before {
+    width: 2rem;
+    height: 2rem;
+    background: rgba(0,0,0,0.4);
+    top: 0;
+    left: -2rem;
+    -webkit-transform-origin: right;
+    -ms-transform-origin: right;
+    transform-origin: right;
+    -webkit-transform: rotate3d(0,-1,0,90deg);
+    transform: rotate3d(0,-1,0,90deg);
+}
+
+#start:after,
+#pause:after,
+#clear:after {
+    width: 100%;
+    height: 2rem;
+    background: rgb(140,140,140);
+    top: -2rem;
+    left: 0;
+    -webkit-transform-origin: bottom;
+    -ms-transform-origin: bottom;
+    transform-origin: bottom;
+    -webkit-transform: rotate3d(1,0,0,90deg);
+    transform: rotate3d(1,0,0,90deg);
+}
+
+/* _sunk in effect */
+
+#start:active,
+#pause:active,
+#pause:disabled,
+#clear:active {
+    -webkit-transform: perspective(800px) translateZ(0rem) !important;
+    transform: perspective(800px) translateZ(0rem) !important;
+}
+#pause:disabled {
+    color: rgba(0,0,0,0.5);
+}
+
+

@@ -100,7 +100,8 @@ function Stopwatch(id){
     }
 
     /* Calculates accurate difference between current & startTime */
-    var getTimeDiff = function(startTime) {
+    var getTimeDiff = this.getTimeDiff = function(startTime) {
+        if(isNaN(startTime)) { throw new TypeError("getTimeDiff requires a number")}
         return Date.now() - startTime;
     }
 }

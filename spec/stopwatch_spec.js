@@ -5,32 +5,31 @@ QUnit.module("Basic setup tests", {
     }
 });
 
-    QUnit.test("Renders span element into div", function(assert) {
-        assert.ok(document.getElementById('time'));
-    });
+QUnit.test("Renders span element into div", function(assert) {
+    assert.ok(document.getElementById('time'));
+});
 
-    QUnit.test("Adds a start button", function(assert) {
-        assert.ok(document.getElementById('start'));
-    });
+QUnit.test("Adds a start button", function(assert) {
+    assert.ok(document.getElementById('start'));
+});
 
-    QUnit.test("Adds a clear button", function(assert) {
-        assert.ok(document.getElementById('clear'));
-    });
+QUnit.test("Adds a clear button", function(assert) {
+    assert.ok(document.getElementById('clear'));
+});
 
-    QUnit.test("Adds a pause button", function(assert) {
-        assert.ok(document.getElementById('pause'));
-    });
+QUnit.test("Adds a pause button", function(assert) {
+    assert.ok(document.getElementById('pause'));
+});
 
-    QUnit.test("Sets time element initially to '00:00:00:000'", function(assert) {
-        assert.equal(document.getElementById('time').textContent, '00:00:00:000');
-    });
+QUnit.test("Sets time element initially to '00:00:00:000'", function(assert) {
+    assert.equal(document.getElementById('time').textContent, '00:00:00:000');
+});
 
-    QUnit.test("Resets the time element when clear is called", function(assert) {
-        this.stopwatch.start();
-        this.stopwatch.clear();
-        assert.equal(document.getElementById('time').textContent, '00:00:00:000');
-    });
-
+QUnit.test("Resets the time element when clear is called", function(assert) {
+    this.stopwatch.start();
+    this.stopwatch.clear();
+    assert.equal(document.getElementById('time').textContent, '00:00:00:000');
+});
 
 /* Time conversion tests */
 QUnit.module("MS-to-Time function tests", {
@@ -39,25 +38,43 @@ QUnit.module("MS-to-Time function tests", {
     }
 });
 
-   QUnit.test('Should be able to format 6 milliseconds to 00:00:00:006', function(assert) {
-        var formatted = this.stopwatch.convertMsToTime(6);
-        assert.equal(formatted,'00:00:00:006');
+QUnit.test('Should be able to format 6 milliseconds to 00:00:00:006', function(assert) {
+    var formatted = this.stopwatch.convertMsToTime(6);
+    assert.equal(formatted,'00:00:00:006');
+});
+
+QUnit.test('Should be able to format 134 milliseconds to 00:00:00:134', function(assert) {
+   var formatted = this.stopwatch.convertMsToTime(134);
+   assert.equal(formatted,'00:00:00:134');
+});
+
+QUnit.test('Should be able to format 6 seconds to 00:00:06:000', function(assert) {
+   var formatted = this.stopwatch.convertMsToTime(6000);
+   assert.equal(formatted,'00:00:06:000');
+});
+
+QUnit.test('Should be able to format 1 hour, 2 minutes, 30 seconds, 14 milliseconds to 01:02:30:014', function(assert) {
+   var formatted = this.stopwatch.convertMsToTime(3750014);
+   assert.equal(formatted,'01:02:30:014');
+});
+
+QUnit.test('Should throw an error if input is not number', function(assert) {
+    assert.throws(function() {
+        this.stopwatch.convertMsToTime('omg!')
     });
+});
 
-   QUnit.test('Should be able to format 134 milliseconds to 00:00:00:134', function(assert) {
-       var formatted = this.stopwatch.convertMsToTime(134);
-       assert.equal(formatted,'00:00:00:134');
-   });
+/* Testing getTimeDiff */
+QUnit.test('getTimeDiff should throw an error if input is not number', function(assert) {
+    assert.throws(function() {
+        this.stopwatch.getTimeDiff('cheese');
+    });
+});
 
-   QUnit.test('Should be able to format 6 seconds to 00:00:06:000', function(assert) {
-       var formatted = this.stopwatch.convertMsToTime(6000);
-       assert.equal(formatted,'00:00:06:000');
-   });
-
-   QUnit.test('Should be able to format 1 hour, 2 minutes, 30 seconds, 14 milliseconds to 01:02:30:014', function(assert) {
-       var formatted = this.stopwatch.convertMsToTime(3750014);
-       assert.equal(formatted,'01:02:30:014');
-   });
+QUnit.test('getTimeDiff returns 100ms if given a time 100ms ago', function(assert) {
+    var pastTime = Date.now() - 100;
+    assert.equal(this.stopwatch.getTimeDiff(pastTime), 100);
+});
 
 /* Async tests */
 QUnit.module("Async tests", {

@@ -39,11 +39,22 @@ function Stopwatch(id){
         that.clear();
     });
 
-    // Date.now.from1970 = function(){return Date.now()}
+    /* Disable/Enable buttons */
+    var enableButton = function(btn){
+        btn.disabled = false;
+    }
+
+    var disableButton = function(btn){
+        btn.disabled = true;
+    }
+
+
+
 
     /* Sets initial time when first called */
     /* When calling after paused, updates startTime to factor in pause length*/
     this.start = function() {
+        enableButton(buttonPauseElt);
         if (!this.counterInit) {
             this.counterInit = this.startTime = Date.now();
         }   else {
@@ -54,12 +65,14 @@ function Stopwatch(id){
 
     /* Stops browser painting & triggers new pausedAt time */
     this.pause = function() {
+        disableButton(buttonPauseElt);
         stopPaint();
         this.pausedAt = Date.now();
     };
 
     /* Resets all */
     this.clear = function() {
+        disableButton(buttonPauseElt);
         stopPaint();
         this.counterInit = this.startTime = this.pausedAt = 0;
         timeElt.textContent = convertMsToTime(0);
@@ -93,4 +106,3 @@ function Stopwatch(id){
 }
 
 Stopwatch("stopwatch");
-

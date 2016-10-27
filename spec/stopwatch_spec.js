@@ -59,16 +59,14 @@ QUnit.module("MS-to-Time function tests", {
        assert.equal(formatted,'01:02:30:014');
    });
 
-
-/* Counter display checks */
-
-
 /* Async tests */
 QUnit.module("Async tests", {
    beforeEach: function() {
        this.stopwatch = new Stopwatch('stopwatch');
    }
 });
+
+/* Counter display checks */
 
 QUnit.test("Counter should be non-zero after running for 0.5s", function(assert) {
     var done = assert.async();

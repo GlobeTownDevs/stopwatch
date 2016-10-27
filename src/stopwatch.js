@@ -1,4 +1,3 @@
-/* holds stopwatch function */
 function Stopwatch(id){
 
     /* holds a setInterval object*/

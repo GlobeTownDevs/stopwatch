@@ -71,9 +71,9 @@ describe('long asynchronous testing for stopwatch', function() {
   it('should take more than a minute',function(done) {
     setTimeout(function() {
       done();
-      stopwatch.stopTimer();
+      // stopwatch.stopTimer();
     },62500);
-  })
+  });
 
   it('should start displaying minutes when seconds count is greater than 59', function(done) {
     expect(Math.abs(min.innerHTML)).toBe(1);

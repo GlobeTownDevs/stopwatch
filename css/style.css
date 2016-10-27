@@ -192,13 +192,14 @@ button {
 
 #start:active,
 #pause:active,
+#clear:active,
+#start:disabled,
 #pause:disabled,
-#clear:active {
+#clear:disabled{
     -webkit-transform: perspective(800px) translateZ(0rem) !important;
     transform: perspective(800px) translateZ(0rem) !important;
-}
-#pause:disabled {
     color: rgba(0,0,0,0.5);
 }
+
 
 

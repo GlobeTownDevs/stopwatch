@@ -51,6 +51,8 @@ function Stopwatch(id){
     /* When calling after paused, updates startTime to factor in pause length*/
     this.start = function() {
         enableButton(buttonPauseElt);
+        enableButton(buttonClearElt);
+        disableButton(buttonStartElt);
         if (!this.counterInit) {
             this.counterInit = this.startTime = Date.now();
         }   else {
@@ -62,6 +64,7 @@ function Stopwatch(id){
     /* Stops browser painting & triggers new pausedAt time */
     this.pause = function() {
         disableButton(buttonPauseElt);
+        enableButton(buttonStartElt);
         stopPaint();
         this.pausedAt = Date.now();
     };
@@ -69,6 +72,8 @@ function Stopwatch(id){
     /* Resets all */
     this.clear = function() {
         disableButton(buttonPauseElt);
+        disableButton(buttonClearElt);
+        enableButton(buttonStartElt);
         stopPaint();
         this.counterInit = this.startTime = this.pausedAt = 0;
         timeElt.textContent = convertMsToTime(0);

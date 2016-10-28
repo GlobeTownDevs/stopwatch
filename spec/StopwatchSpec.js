@@ -1,8 +1,11 @@
 describe("Basic tests when starting the stopwatch", function() {
     var clickSpy = jasmine.createSpy();
-  it('should be set to paused on load', function() {
+  it('should not run on load', function() {
     console.log("test1");
     expect(isPaused).toBe(true);
+    expect(ms.innerHTML).toBe('00');
+    expect(s.innerHTML).toBe('00');
+    expect(min.innerHTML).toBe('00');
   });
 
   // it('should start on clicking the start button', function() {
@@ -54,9 +57,9 @@ describe('short asynchronous testing for stopwatch', function() {
   beforeEach(function(done) {
     stopwatch.startTimer();
     setTimeout(function() {
-      done();
       stopwatch.stopTimer();
-  },2500);
+      done();
+  },2600);
   });
 
   it('should not be able to display more than 999 milliseconds in the ms div',function(done) {
@@ -65,7 +68,7 @@ describe('short asynchronous testing for stopwatch', function() {
   });
 
   it('should start displaying seconds when milliseconds count is greater than 999', function(done) {
-    expect(Math.abs(s.innerHTML)).toBe(2);
+    expect(Math.abs(s.innerHTML)).toBe(5);
     done();
   });
 

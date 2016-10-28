@@ -19,6 +19,7 @@ var stopwatch = {
     isPaused = true;
     startingTime = null;
     pauseTime = null;
+    time = 0;
     ms.innerHTML = '00';
     s.innerHTML = '00';
     min.innerHTML = '00';

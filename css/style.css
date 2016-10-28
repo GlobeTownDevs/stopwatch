@@ -79,11 +79,11 @@ button {
 /* _3d rotation */
 @-webkit-keyframes bigRotate {
     70% {-webkit-transform: perspective(0px) rotate3d(0,0,0,0);transform: perspective(0px) rotate3d(0,0,0,0);}
-    100% {-webkit-transform: perspective(800px) rotate3d(-1,2,-.3,45deg);transform: perspective(800px) rotate3d(-1,2,-.3,45deg);}
+    100% {-webkit-transform: perspective(800px) rotate3d(-1,2,-.3,45deg);transform: perspective(800px) rotate3d(-1,4,-.4,40deg);}
 }
 @keyframes bigRotate {
     70% {-webkit-transform: perspective(0px) rotate3d(0,0,0,0);transform: perspective(0px) rotate3d(0,0,0,0);}
-    100% {-webkit-transform: perspective(800px) rotate3d(-1,2,-.3,45deg);transform: perspective(800px) rotate3d(-1,2,-.3,45deg);}
+    100% {-webkit-transform: perspective(800px) rotate3d(-1,2,-.3,45deg);transform: perspective(800px) rotate3d(-1,4,-.4,40deg);}
 }
 
 
@@ -149,8 +149,8 @@ button {
     background: rgb(130,130,130);
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    -webkit-transform: translateZ(1.5rem);
-    transform: translateZ(1.5rem);
+    -webkit-transform: translateZ(1rem);
+    transform: translateZ(1rem);
     border: 0;
     margin: .1rem;
     cursor: pointer;
